@@ -1,0 +1,26 @@
+body {
+    color: #475059;
+    background-color: #fff;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+    color: #2600a9;
+    font-size: 50px;
+}
+
+h2 {
+    color: #2600a9;
+    font-weight: 700;
+    font-size: 32px;
+}
+
+h3 {
+    color: #2600a9;
+    font-size: 24px;
+}
+
+h4 {
+    color: #475059;
+    font-size: 18px;
+}
