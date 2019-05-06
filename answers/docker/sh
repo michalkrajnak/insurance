@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+COMMAND="docker exec -u node -it insurance-answers"
+
+if [ $(uname -s) == "Linux" ]; then
+  if [ $# -eq 0 ]; then
+      $COMMAND bash
+  else
+      $COMMAND $@
+  fi
+else
+  if [ $# -eq 0 ]; then
+      winpty $COMMAND bash
+  else
+      winpty $COMMAND $@
+  fi
+fi

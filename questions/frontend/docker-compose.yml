@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  dev_insurance-questions-fo:
+    container_name: dev_insurance-questions-fo
+    image: node:10.15.3-stretch
+    working_dir: /app
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+
+  test_insurance-questions-fo:
+    container_name: test_insurance-questions-fo
+    image: node:10.15.3-stretch
+    working_dir: /app
+    command: npm test
+    volumes:
+      - ./:/app
+
+networks:
+  main_dev:
