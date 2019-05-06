@@ -1,0 +1,141 @@
+version: '3.7'
+
+services:
+
+  insurance-traefik:
+    container_name: insurance-traefik
+    image: traefik:latest
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/traefik/traefik.toml:/traefik.toml
+    networks:
+      - main
+
+  insurance-products-fo:
+    container_name: insurance-products-fo
+    image: httpd:latest
+    labels:
+      traefik.docker.network: main
+      traefik.enable: true
+      traefik.basic.frontend.rule: "Host:insurance.local;PathPrefix:/products;PathPrefixStrip:/products"
+      traefik.basic.port: 80
+      traefik.basic.protocol: http
+    volumes:
+      - ./docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./products/frontend/dist:/usr/local/apache2/htdocs
+    networks:
+      - main
+
+  insurance-products:
+    container_name: insurance-products
+    image: node:10.15.3-stretch
+    tty: true
+    working_dir: /home/node/app
+#    command: npm start #TODO: uncomment after creating npm start script
+    expose:
+      - 3000
+    labels:
+      traefik.docker.network: main
+      traefik.enable: true
+      traefik.basic.frontend.rule: "Host:insurance.local;PathPrefix:/api/products;PathPrefixStrip:/api/products"
+      traefik.basic.port: 3000
+      traefik.basic.protocol: http
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./products/backend:/home/node/app
+    networks:
+      - main
+
+  insurance-questions-fo:
+    container_name: insurance-questions-fo
+    image: httpd:latest
+    labels:
+      traefik.docker.network: main
+      traefik.enable: true
+      traefik.basic.frontend.rule: "Host:insurance.local;PathPrefix:/questions;PathPrefixStrip:/questions"
+      traefik.basic.port: 80
+      traefik.basic.protocol: http
+    volumes:
+      - ./questions/frontend/dist:/usr/local/apache2/htdocs
+    networks:
+      - main
+
+  insurance-questions:
+    container_name: insurance-questions
+    image: node:10.15.3-stretch
+    tty: true
+    working_dir: /home/node/app
+#    command: npm start #TODO: uncomment after creating npm start script
+    expose:
+      - 3000
+    labels:
+      traefik.docker.network: main
+      traefik.enable: true
+      traefik.basic.frontend.rule: "Host:insurance.local;PathPrefix:/api/questions;PathPrefixStrip:/api/questions"
+      traefik.basic.port: 3000
+      traefik.basic.protocol: http
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./questions/backend:/home/node/app
+    networks:
+      - main
+
+  insurance-answers:
+    container_name: insurance-answers
+    image: node:10.15.3-stretch
+    tty: true
+    working_dir: /home/node/app
+#    command: npm start #TODO: uncomment after creating npm start script
+    expose:
+      - 3000
+    labels:
+      traefik.docker.network: main
+      traefik.enable: true
+      traefik.basic.frontend.rule: "Host:insurance.local;PathPrefix:/api/answers;PathPrefixStrip:/api/answers"
+      traefik.basic.port: 3000
+      traefik.basic.protocol: http
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./answers:/home/node/app
+    networks:
+      - main
+
+  insurance-mongo:
+    image: mongo:latest
+    container_name: insurance-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - main
+
+  insurance-mongo-express:
+    image: mongo-express:latest
+    container_name: insurance-mongo-expres
+    depends_on:
+      - insurance-mongo
+    labels:
+      traefik.docker.network: main
+      traefik.enable: true
+      traefik.basic.frontend.rule: "Host:mongo.insurance.local"
+      traefik.basic.port: 8081
+      traefik.basic.protocol: http
+    environment:
+      ME_CONFIG_MONGODB_SERVER: insurance-mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+    networks:
+      - main
+
+volumes:
+  mongo_data:
+
+networks:
+  main:

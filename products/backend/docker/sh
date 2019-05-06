@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-COMMAND="docker exec -u node -it insurance-backend"
+COMMAND="docker exec -u node -it insurance-products"
 
 if [ $(uname -s) == "Linux" ]; then
   if [ $# -eq 0 ]; then
