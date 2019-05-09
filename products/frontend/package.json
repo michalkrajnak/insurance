@@ -2,6 +2,25 @@
   "name": "insurance-fo-products",
   "version": "1.0.0",
   "description": "Insurance products micro frontend",
+  "scripts": {
+    "dev": "webpack-dev-server --open --config config/webpack.dev.js"
+  },
   "author": "AVS",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@codex/basics": "^7.0.0",
+    "@codex/themes": "^3.0.0",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^2.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
+  }
 }
