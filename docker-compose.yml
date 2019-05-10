@@ -44,11 +44,10 @@ services:
       traefik.basic.protocol: http
     environment:
       NODE_ENV: development
-      MONGODB_SERVER: insurance-mongo
-      MONGO_DB_PORT: 27017
-      MONGODB_ADMINUSERNAME: root
-      MONGODB_ADMINPASSWORD: root
-
+      MONGODB_SERVER: ${MONGODB_SERVER}
+      MONGO_DB_PORT: ${MONGO_DB_PORT}
+      MONGODB_ADMIN_USERNAME: ${MONGODB_ADMIN_USERNAME}
+      MONGODB_ADMIN_PASSWORD: ${MONGODB_ADMIN_PASSWORD}
     volumes:
       - ./products/backend:/home/node/app
     networks:
@@ -114,8 +113,8 @@ services:
     image: mongo:latest
     container_name: insurance-mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ADMIN_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ADMIN_PASSWORD}
     volumes:
       - mongo_data:/data/db
     networks:
@@ -133,9 +132,9 @@ services:
       traefik.basic.port: 8081
       traefik.basic.protocol: http
     environment:
-      ME_CONFIG_MONGODB_SERVER: insurance-mongo
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_SERVER: ${MONGODB_SERVER}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_ADMIN_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_ADMIN_PASSWORD}
     networks:
       - main
 

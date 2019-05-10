@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon -L server.js"
+    "dev": "nodemon -L server.js",
+    "import-db-data": "node import-db-data.js"
   },
   "author": "AVS",
   "license": "ISC",
