@@ -33,7 +33,7 @@ services:
     image: node:10.15.3-stretch
     tty: true
     working_dir: /home/node/app
-#    command: npm start #TODO: uncomment after creating npm start script
+    command: npm start
     expose:
       - 3000
     labels:
@@ -43,7 +43,12 @@ services:
       traefik.basic.port: 3000
       traefik.basic.protocol: http
     environment:
-      - NODE_ENV=development
+      NODE_ENV: development
+      MONGODB_SERVER: insurance-mongo
+      MONGO_DB_PORT: 27017
+      MONGODB_ADMINUSERNAME: root
+      MONGODB_ADMINPASSWORD: root
+
     volumes:
       - ./products/backend:/home/node/app
     networks:

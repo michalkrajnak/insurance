@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Insurance`s product API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/product": {
+      "get": {
+        "description": "Returns insurance products.",
+        "parameters": [
+          {
+            "name": "productTypes",
+            "in": "query",
+            "description": "Product types (SBRE, SB..)",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductsResponse"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductsResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "productType": {
+            "type": "string"
+          }
+        }
+      },
+      "example": [
+        {
+          "_id": "5cd132589b975700380c7455",
+          "name": "Damage",
+          "description": "Jealous neighbour destroy your new satellite TV a…",
+          "productType": "SB"
+        },
+        {
+          "_id": "5cd132589b975700380c7456",
+          "name": "Lost",
+          "description": "Your device is damaged? We'll immediately repair …",
+          "productType": "BB"
+        }
+      ]
+    },
+    "ErrorResponse": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
