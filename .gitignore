@@ -1,2 +1,5 @@
 # IDE files
 /.idea
+
+# Custom files
+docker-compose.override.yaml
