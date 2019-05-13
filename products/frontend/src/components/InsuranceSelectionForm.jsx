@@ -1,40 +1,47 @@
 import React, {Component, Fragment} from 'react'
-import {Checkbox} from '@codex/basics'
+import {Button, Checkbox} from '@codex/basics'
 
 class InsuranceSelectionForm extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            firstChecked: false,
-            secondChecked: false,
-            thirdChecked: false
+            selectedInsuranceProducts: {}
         }
+
+        this.handleCheck = this.handleCheck.bind(this)
+    }
+
+    handleCheck(insuranceProductId) {
+        const newState = {};
+        const { selectedInsuranceProducts } = this.state
+
+        newState[insuranceProductId] = selectedInsuranceProducts[insuranceProductId] ? !selectedInsuranceProducts[insuranceProductId] : true
+        this.setState({
+            selectedInsuranceProducts: {
+                ...selectedInsuranceProducts,
+                ...newState
+            }
+        })
     }
 
     render() {
+        const { selectedInsuranceProducts } = this.state
+
         return (
             <Fragment>
-                SmallBox
-                <Checkbox
-                    checked={this.state.firstChecked}
-                    onCheck={() => this.setState({firstChecked: !this.state.firstChecked})}
-                >
-                    SmallBox
-                </Checkbox>
-                <Checkbox
-                    checked={this.state.secondChecked}
-                    onCheck={() => this.setState({secondChecked: !this.state.secondChecked})}
-                >
-                    BigBox
-                </Checkbox>
-                <Checkbox
-                    checked={this.state.thirdChecked}
-                    onCheck={() => this.setState({thirdChecked: !this.state.thirdChecked})}
-                >
-                    SBRE
-                </Checkbox>
-
+                {this.props.productTypes.map((insuranceProduct, index) => (
+                    <Checkbox
+                        key={index}
+                        checked={selectedInsuranceProducts[insuranceProduct._id]}
+                        onCheck={() => this.handleCheck(insuranceProduct._id)}
+                    >
+                        {insuranceProduct.name}
+                    </Checkbox>
+                ))}
+                <Button full style={{width: 150}}>
+                    Submit
+                </Button>
             </Fragment>
         )
     }
