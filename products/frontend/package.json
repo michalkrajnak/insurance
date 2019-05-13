@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Insurance products micro frontend",
   "scripts": {
-    "dev": "webpack-dev-server --open --config config/webpack.dev.js"
+    "test": "echo not implemented",
+    "start": "webpack-dev-server --open --config config/webpack.dev.js"
   },
   "author": "AVS",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "@babel/preset-react": "^7.0.0",
     "@codex/basics": "^7.0.0",
     "@codex/themes": "^3.0.0",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.2",
     "html-webpack-plugin": "^3.2.0",

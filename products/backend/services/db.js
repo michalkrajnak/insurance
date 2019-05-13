@@ -5,8 +5,8 @@ mongoose.connect(db_uri, {
     auth: {
         authSource: `admin`
     },
-    user: process.env.MONGODB_ADMINUSERNAME,
-    pass: process.env.MONGODB_ADMINPASSWORD,
+    user: process.env.MONGODB_ADMIN_USERNAME,
+    pass: process.env.MONGODB_ADMIN_PASSWORD,
     useNewUrlParser: true
 });
 

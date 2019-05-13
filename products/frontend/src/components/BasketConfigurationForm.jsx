@@ -7,9 +7,9 @@ class BasketConfigurationForm extends Component {
         super(props)
 
         this.state = {
-            firstChecked: false,
-            secondChecked: false,
-            thirdChecked: false
+            SB: false,
+            BB: false,
+            SBRE: false
         }
 
         this.onSubmit = this.onSubmit.bind(this)
@@ -23,20 +23,20 @@ class BasketConfigurationForm extends Component {
         return (
             <Fragment>
                 <Checkbox
-                    checked={this.state.firstChecked}
-                    onCheck={() => this.setState({firstChecked: !this.state.firstChecked})}
+                    checked={this.state.SB}
+                    onCheck={() => this.setState({SB: !this.state.SB})}
                 >
                     SmallBox
                 </Checkbox>
                 <Checkbox
-                    checked={this.state.secondChecked}
-                    onCheck={() => this.setState({secondChecked: !this.state.secondChecked})}
+                    checked={this.state.BB}
+                    onCheck={() => this.setState({BB: !this.state.BB})}
                 >
                     BigBox
                 </Checkbox>
                 <Checkbox
-                    checked={this.state.thirdChecked}
-                    onCheck={() => this.setState({thirdChecked: !this.state.thirdChecked})}
+                    checked={this.state.SBRE}
+                    onCheck={() => this.setState({SBRE: !this.state.SBRE})}
                 >
                     SBRE
                 </Checkbox>
