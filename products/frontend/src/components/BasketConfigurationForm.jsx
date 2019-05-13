@@ -10,8 +10,14 @@ class BasketConfigurationForm extends Component {
         this.state = {
             SB: false,
             BB: false,
-            SBRE: false,
+            SBRE: false
         }
+
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onSubmit() {
+        this.props.onSelect(this.state)
     }
 
     render() {

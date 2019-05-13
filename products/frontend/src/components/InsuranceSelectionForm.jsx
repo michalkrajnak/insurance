@@ -8,7 +8,7 @@ class InsuranceSelectionForm extends Component {
         super(props)
 
         this.state = {
-            selectedInsuranceProducts: {},
+            selectedInsuranceProducts: {}
         }
 
         this.handleCheck = this.handleCheck.bind(this)
