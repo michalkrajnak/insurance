@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import { Checkbox } from '@codex/basics'
-import { Button } from '@codex/basics'
+import { Button, Checkbox, H1 } from '@codex/basics'
+import { connect } from 'react-redux'
+import { submitProductTypes } from '../reducer'
 
 class BasketConfigurationForm extends Component {
     constructor(props) {
@@ -9,19 +10,14 @@ class BasketConfigurationForm extends Component {
         this.state = {
             SB: false,
             BB: false,
-            SBRE: false
+            SBRE: false,
         }
-
-        this.onSubmit = this.onSubmit.bind(this)
-    }
-
-    onSubmit() {
-        this.props.onSelect(this.state)
     }
 
     render() {
         return (
             <Fragment>
+                <H1>Basket configuration</H1>
                 <Checkbox
                     checked={this.state.SB}
                     onCheck={() => this.setState({SB: !this.state.SB})}
@@ -40,7 +36,7 @@ class BasketConfigurationForm extends Component {
                 >
                     SBRE
                 </Checkbox>
-                <Button full onClick={this.onSubmit} style={{width: 150}}>
+                <Button full onClick={() => this.props.submitProductTypes(this.state)} style={{width: 150}}>
                     Submit
                 </Button>
             </Fragment>
@@ -48,4 +44,4 @@ class BasketConfigurationForm extends Component {
     }
 }
 
-export default BasketConfigurationForm
+export default connect(() => ({}), {submitProductTypes})(BasketConfigurationForm)
