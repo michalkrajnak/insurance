@@ -5,6 +5,4 @@ export const getInsuranceProducts = (productType) =>
         params: {
             productTypes: productType,
         },
-    }).catch((err) => {
-        console.error(err)
-    })
+    }).catch((err) => console.error(err))
