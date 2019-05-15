@@ -15,17 +15,15 @@ export const submitProductTypes = (productTypes) => (dispatch) => {
 
     Object.keys(productTypes).map((productType) => {
         if (productTypes[productType]) {
-            getInsuranceProducts(productType).then((response) => {
-                dispatch(() => dispatch({
-                        type: STORE_INSURANCE_PRODUCTS,
-                        payload:
-                            {
-                                productType,
-                                data: response.data,
-                            },
-                    }),
-                )
-            })
+            getInsuranceProducts(productType).then((response) => dispatch({
+                    type: STORE_INSURANCE_PRODUCTS,
+                    payload:
+                        {
+                            productType,
+                            data: response.data,
+                        },
+                }),
+            )
         }
     })
 }

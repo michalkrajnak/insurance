@@ -44,4 +44,4 @@ class BasketConfigurationForm extends Component {
     }
 }
 
-export default connect(() => ({}), {submitProductTypes})(BasketConfigurationForm)
+export default connect(null, {submitProductTypes})(BasketConfigurationForm)
